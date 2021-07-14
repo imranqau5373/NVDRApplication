@@ -27,6 +27,8 @@ namespace NVDR.API.Controllers
         {
             try
             {
+
+                //check
                 var nvdrRecords = _repository.NvdrRecordRepository.GetAllNvdrRecord(trackChanges: false);
                 return Ok(nvdrRecords);
             }
