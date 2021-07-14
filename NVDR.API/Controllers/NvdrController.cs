@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Contracts;
+using Entities.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,7 +29,6 @@ namespace NVDR.API.Controllers
             try
             {
 
-                //check
                 var nvdrRecords = _repository.NvdrRecordRepository.GetAllNvdrRecord(trackChanges: false);
                 return Ok(nvdrRecords);
             }
@@ -38,6 +38,35 @@ namespace NVDR.API.Controllers
             }
         }
 
+        [HttpPost("Upsert")]
+        public IActionResult UpsertNvdrRecords(NvdrRecord nvdrRecords)
+        {
+            try
+            {
+                if (nvdrRecords == null)
+                {
+                    return StatusCode(500, "Model is Null");
+                }
+                if (ModelState.IsValid)
+                {
+                    if (nvdrRecords.Id == 0)
+                    {
+                        _repository.NvdrRecordRepository.AddNvdrRecord(nvdrRecords);
+                    }
+                    else
+                    {
+                        _repository.NvdrRecordRepository.UpdateNvdrRecord(nvdrRecords);
+                    }
+                    _repository.Save();
+
+                }
+                return Ok(nvdrRecords);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error" + ex.Message);
+            }
+        }
 
 
 

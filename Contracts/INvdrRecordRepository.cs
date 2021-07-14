@@ -9,5 +9,8 @@ namespace Contracts
     {
 
         IEnumerable<NvdrRecord> GetAllNvdrRecord(bool trackChanges);
+
+        void AddNvdrRecord(NvdrRecord nvdrRecords);
+        void UpdateNvdrRecord(NvdrRecord nvdrRecords);
     }
 }
