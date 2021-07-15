@@ -10,10 +10,10 @@ namespace Contracts
 
         IEnumerable<NvdrEmail> GetAllNvdrEmail(bool trackChanges);
 
-        void AddNvdrEmail(NvdrEmail nvdrEmails);
-        void UpdateNvdrEmail(NvdrEmail nvdrEmails);
+        void AddNvdrEmail(NvdrEmail nvdrEmail);
+        void UpdateNvdrEmail(NvdrEmail nvdrEmail);
         
-        void DeleteNvdrEmail(NvdrEmail nvdrEmails);
+        void DeleteNvdrEmail(NvdrEmail nvdrEmail);
 
     }
 }

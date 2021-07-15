@@ -13,6 +13,7 @@ namespace Repository
         private INvdrRecordRepository _nvdrRecordRepository;
 
         private INvdrEmailRepository _nvdrEmailRepository;
+        private INvdrFaultEmailRepository _nvdrFaultEmailRepository;
 
         public RepositoryManager(RepositoryContext repositoryContext)
         {
@@ -35,6 +36,15 @@ namespace Repository
                 if (_nvdrEmailRepository == null)
                     _nvdrEmailRepository = new NvdrEmailRepository(_repositoryContext);
                 return _nvdrEmailRepository;
+            }
+        }
+        public INvdrFaultEmailRepository NvdrFaultEmailRepository
+        {
+            get
+            {
+                if (_nvdrFaultEmailRepository == null)
+                    _nvdrFaultEmailRepository = new NvdrFaultEmailRepository(_repositoryContext);
+                return _nvdrFaultEmailRepository;
             }
         }
         public void Save() => _repositoryContext.SaveChanges();

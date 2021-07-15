@@ -8,6 +8,7 @@ namespace Contracts
     {
         INvdrRecordRepository NvdrRecordRepository { get; }
         INvdrEmailRepository NvdrEmailRepository { get; }
+        INvdrFaultEmailRepository NvdrFaultEmailRepository { get; }
         void Save();
 
     }

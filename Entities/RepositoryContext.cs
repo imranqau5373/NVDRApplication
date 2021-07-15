@@ -15,6 +15,7 @@ namespace Entities
 
         public DbSet<NvdrRecord> NvdrRecords { get; set; }
         public DbSet<NvdrEmail> NvdrEmails { get; set; }
+        public DbSet<NvdrFaultEmail> NvdrFaultEmails { get; set; }
 
 
     }
