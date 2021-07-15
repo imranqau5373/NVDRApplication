@@ -12,5 +12,8 @@ namespace Contracts
 
         void AddNvdrRecord(NvdrRecord nvdrRecords);
         void UpdateNvdrRecord(NvdrRecord nvdrRecords);
+        
+        void DeleteNvdrRecord(NvdrRecord nvdrRecords);
+
     }
 }

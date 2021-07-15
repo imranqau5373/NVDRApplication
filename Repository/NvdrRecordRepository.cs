@@ -23,6 +23,8 @@ namespace Repository
         public void AddNvdrRecord(NvdrRecord nvdrRecords) => Create(nvdrRecords);
         public void UpdateNvdrRecord(NvdrRecord nvdrRecords) => Update(nvdrRecords);
 
+        public void DeleteNvdrRecord(NvdrRecord nvdrRecords) => Delete(nvdrRecords);
+
     }
 
 }
