@@ -7,6 +7,7 @@ namespace Contracts
     public interface IRepositoryManager
     {
         INvdrRecordRepository NvdrRecordRepository { get; }
+        INvdrEmailRepository NvdrEmailRepository { get; }
         void Save();
 
     }

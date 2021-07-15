@@ -1,63 +1,63 @@
-﻿using System;
+﻿using Contracts;
+using Entities.Models;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Contracts;
-using Entities.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 
 namespace NVDR.API.Controllers
 {
-    [Route("api/nvdr")]
+
+    [Route("api/nvdrEmail")]
     [ApiController]
-    public class NvdrController : ControllerBase
+    public class NvdrEmailController : ControllerBase
     {
 
         private ILoggerManager _logger;
         private readonly IRepositoryManager _repository;
 
-        public NvdrController(ILoggerManager logger, IRepositoryManager repository)
+        public NvdrEmailController(ILoggerManager logger, IRepositoryManager repository)
         {
             _logger = logger;
             _repository = repository;
         }
 
         [HttpGet]
-        public IActionResult GetNvdrRecords()
+        public IActionResult GetNvdrEmails()
         {
             try
             {
 
-                var nvdrRecords = _repository.NvdrRecordRepository.GetAllNvdrRecord(trackChanges: false);
+                var nvdrRecords = _repository.NvdrEmailRepository.GetAllNvdrEmail(trackChanges: false);
                 return Ok(nvdrRecords);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "Internal server error"+ex.Message);
+                return StatusCode(500, "Internal server error" + ex.Message);
             }
         }
 
         [HttpPost]
-        public IActionResult AddNvdr(NvdrRecord nvdrRecord)
+        public IActionResult AddNvdrEmail(NvdrEmail nvdrEmail)
         {
             try
             {
-                if (nvdrRecord == null)
+                if (nvdrEmail == null)
                 {
                     return StatusCode(500, "Model is Null");
                 }
                 if (ModelState.IsValid)
                 {
-                   
-                        _repository.NvdrRecordRepository.AddNvdrRecord(nvdrRecord);
-                    
-                 
-               
+
+                    _repository.NvdrEmailRepository.AddNvdrEmail(nvdrEmail);
+
+
+
                     _repository.Save();
 
                 }
-                return Ok(nvdrRecord);
+                return Ok(nvdrEmail);
             }
             catch (Exception ex)
             {
@@ -66,57 +66,53 @@ namespace NVDR.API.Controllers
         }
 
 
-         [HttpPut]
-         public IActionResult UpdateNvdr(NvdrRecord nvdrRecord)
+        [HttpPut]
+        public IActionResult UpdateNvdr(NvdrEmail nvdrEmail)
         {
             try
             {
-                if (nvdrRecord == null)
+                if (nvdrEmail == null)
                 {
                     return StatusCode(500, "Model is Null");
                 }
                 if (ModelState.IsValid)
-                {                    
-                     _repository.NvdrRecordRepository.UpdateNvdrRecord(nvdrRecord);
-          
+                {
+                    _repository.NvdrEmailRepository.UpdateNvdrEmail(nvdrEmail);
+
                     _repository.Save();
 
                 }
-                return Ok(nvdrRecord);
+                return Ok(nvdrEmail);
             }
             catch (Exception ex)
             {
                 return StatusCode(500, "Internal server error" + ex.Message);
             }
         }
-        
-        
+
+
         [HttpDelete]
-         public IActionResult DeleteNvdr(NvdrRecord nvdrRecord)
+        public IActionResult DeleteNvdr(NvdrEmail nvdrEmail)
         {
             try
             {
-                if (nvdrRecord == null)
+                if (nvdrEmail == null)
                 {
                     return StatusCode(500, "Model is Null");
                 }
                 if (ModelState.IsValid)
-                {                    
-                     _repository.NvdrRecordRepository.DeleteNvdrRecord(nvdrRecord);
-          
+                {
+                    _repository.NvdrEmailRepository.DeleteNvdrEmail(nvdrEmail);
+
                     _repository.Save();
 
                 }
-                return Ok(nvdrRecord);
+                return Ok(nvdrEmail);
             }
             catch (Exception ex)
             {
                 return StatusCode(500, "Internal server error" + ex.Message);
             }
         }
-
-       
-
-
     }
 }

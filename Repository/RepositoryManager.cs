@@ -9,7 +9,11 @@ namespace Repository
     public class RepositoryManager : IRepositoryManager
     {
         private RepositoryContext _repositoryContext;
+
         private INvdrRecordRepository _nvdrRecordRepository;
+
+        private INvdrEmailRepository _nvdrEmailRepository;
+
         public RepositoryManager(RepositoryContext repositoryContext)
         {
             _repositoryContext = repositoryContext;
@@ -24,6 +28,15 @@ namespace Repository
             }
         }
 
+        public INvdrEmailRepository NvdrEmailRepository
+        {
+            get
+            {
+                if (_nvdrEmailRepository == null)
+                    _nvdrEmailRepository = new NvdrEmailRepository(_repositoryContext);
+                return _nvdrEmailRepository;
+            }
+        }
         public void Save() => _repositoryContext.SaveChanges();
     }
 }
