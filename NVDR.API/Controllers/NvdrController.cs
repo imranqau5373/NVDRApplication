@@ -38,6 +38,21 @@ namespace NVDR.API.Controllers
             }
         }
 
+        [HttpGet("getNvdrRecord/{id}")]
+        public IActionResult GetNvdrRecord(long id)
+        {
+            try
+            {
+
+                var nvdrRecords = _repository.NvdrRecordRepository.GetNvdrRecord(id,trackChanges: false);
+                return Ok(nvdrRecords);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error" + ex.Message);
+            }
+        }
+
         [HttpPost]
         public IActionResult AddNvdr(NvdrRecord nvdrRecord)
         {
@@ -49,11 +64,7 @@ namespace NVDR.API.Controllers
                 }
                 if (ModelState.IsValid)
                 {
-                   
-                        _repository.NvdrRecordRepository.AddNvdrRecord(nvdrRecord);
-                    
-                 
-               
+                    _repository.NvdrRecordRepository.AddNvdrRecord(nvdrRecord);
                     _repository.Save();
 
                 }
